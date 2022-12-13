@@ -1,119 +1,121 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap');
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Manrope', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Manrope', sans-serif;
 }
 
 label,p {
-    color: #FFF
+  color: #FFF
 }
 
 .root {
-    display: flex;
-    place-content: center flex-start;
-    align-items: center;
-    background-color: rgb(0, 0, 0);
-    flex-flow: column nowrap;
-    gap: 10px;
-    height: 100vh;
-    overflow: auto;
-    padding: 0px;
-    position: relative;
+  display: flex;
+  place-content: center flex-start;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+  flex-flow: column nowrap;
+  gap: 10px;
+  height: 100vh;
+  overflow: auto;
+  padding: 0px;
+  position: relative;
 }
 
 .container {
-    display: flex;
-    place-content: center flex-start;
-    align-items: center;
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    gap: 10px;
-    height: fit-content;
-    max-width: 975px;
-    overflow: auto;
-    padding: 50px;
-    position: relative;
-    width: auto;
-    gap: 64px;
+  display: flex;
+  place-content: center flex-start;
+  align-items: center;
+  flex: 0 0 auto;
+  flex-flow: column nowrap;
+  gap: 0.625rem;
+  height: fit-content;
+  width: 60rem;
+  max-width: 100%;
+  overflow: auto;
+  padding: 3.125rem 0;
+  position: relative;
+  gap: 3rem;
 }
 
 .header {    
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    color: #FFF
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  color: #FFF
 }
 
 .header-title {
-    display: flex;
-    gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 
 .header-title h1 {
-    width: 100%;
-    font-weight: 700;
-    font-size: 72px;
-    letter-spacing: -4px;
-    line-height: 1.2em;
-    text-align: center;
-    margin: 0;
+  width: 100%;
+  font-weight: 700;
+  font-size: 72px;
+  letter-spacing: -4px;
+  line-height: 1.2em;
+  text-align: center;
+  margin: 0;
 }
 
 .header-subtitle h2 {
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.4em;
-    color: rgba(255, 255, 255, 0.75);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4em;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
 }
 
 .prompt-container {
-    place-content: flex-end center;
-    display: flex;
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    gap: 16px;
-    height: min-content;
-    padding: 0px;
-    width: min-content;
+  place-content: flex-end center;
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: column nowrap;
+  gap: 16px;
+  height: min-content;
+  padding: 0px;
+  width: min-content;
 }
 
 .prompt-input {
-    border-bottom-width: 1px;
-    border-color: rgba(255, 255, 255, 0.1);
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-style: solid;
-    border-top-width: 1px;
-    place-content: flex-start;
-    align-items: flex-start;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    display: flex;
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    gap: 10px;
-    height: 44px;
-    overflow: hidden;
-    padding: 20px;
-    position: relative;
-    width: 610px;
-    max-width: 1200px;
-    will-change: transform;
-    overflow: auto;
-    outline: none;
-    resize: none;
-    font-size: 16px;
-    font-style: normal;
-    letter-spacing: 0px;
-    line-height: 1.6em;
-    text-align: start;
-    color: rgba(255, 255, 255, 0.75);
-    text-decoration: none;
-    text-transform: none;
+  border-bottom-width: 1px;
+  border-color: rgba(255, 255, 255, 0.1);
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-style: solid;
+  border-top-width: 1px;
+  place-content: flex-start;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: column nowrap;
+  gap: 10px;
+  height: 44px;
+  overflow: hidden;
+  padding: 20px;
+  position: relative;
+  width: 38.125rem;
+  max-width: 100%;
+  will-change: transform;
+  overflow: auto;
+  outline: none;
+  resize: none;
+  font-size: 16px;
+  font-style: normal;
+  letter-spacing: 0px;
+  line-height: 1.6em;
+  text-align: start;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  text-transform: none;
+  margin-top: .75rem;
 }
 
 .prompt-box {
@@ -152,31 +154,31 @@ label,p {
 }
 
 textarea, input {
-    font-family: 'Manrope', sans-serif;
+  font-family: 'Manrope', sans-serif;
 }
 
 .prompt-input:focus {
-    border-color:rgba(255, 255, 255, 0.75)
+  border-color:rgba(255, 255, 255, 0.75)
 }
 
 .prompt-box:focus {
-    border-color:rgba(255, 255, 255, 0.75)
+  border-color:rgba(255, 255, 255, 0.75)
 }
 
 
 .prompt-buttons {
-    display: flex;
-    place-content: center;
-    align-items: center;
-    justify-content: flex-end;
-    flex: 0 0 auto;
-    flex-flow: row nowrap;
-    gap: 12px;
-    height: min-content;
-    overflow: hidden;
-    padding: 0px;
-    position: relative;
-    width: 100%;
+  display: flex;
+  place-content: center;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+  flex-flow: row nowrap;
+  gap: 12px;
+  height: min-content;
+  overflow: hidden;
+  padding: 0px;
+  position: relative;
+  width: 100%;
 }
 
 .key-stroke {
@@ -348,7 +350,7 @@ textarea, input {
     color: #ffffff;
     text-decoration: none;
     text-transform: none;
-    margin: 0;
+    margin-top: 2rem;
 }
 
 .output-content {
@@ -369,70 +371,78 @@ textarea, input {
 
 @media (min-width: 810px) and (max-width: 1199px) {
     .container {
-        max-width: 600px;
-        width: 100%;
+      max-width: 37.5rem;
+      width: 100%;
     }
 
     .prompt-container {
-        max-width: 600px;
-        width: 100%;
+      display: flex;
+      align-items: center;
+      width: 32rem;
+      max-width: 100%;
     }
-
-    .prompt-input {
-        width: 100%;
+  
+    .prompt-div {
+      max-width: 100%
     }
-    
-    .prompt-box {
-        width: 100%;
+  
+    .prompt-box, .prompt-input {
+      width: 28rem;
+      max-width: 100%;
     }
 }
 
 @media (max-width: 809px) {
-    .container {
-        max-width: 500px;
-        width: 100%;
-    }
+  .container {
+    max-width: 31.25rem;
+    width: 100%;
+  }
 
-    .prompt-container {
-        max-width: 500px;
-        width: 100%;
-    }
+  .prompt-container {
+    display: flex;
+    align-items: center;
+    width: 28rem;
+    max-width: 100%;
+  }
 
-    .prompt-box, .prompt-input {
-        width: 100%;
-    }
+  .prompt-div {
+    max-width: 100%
+  }
+
+  .prompt-box, .prompt-input {
+    width: 25rem;
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 600px) {
-    .container {
-        max-width: 400px;
-        width: 100%;
-    }
+  .container {
+    max-width: 25rem;
+  }
+  
+  .header-title h1 {
+    font-size: 50px;
+  }
 
-    .header-title h1 {
-        font-size: 50px;
-    }
+  .key-stroke, .or {
+      display: none;
+  }
 
-    .header-subtitle h2 {
-        text-align: center;
-    }
+  .prompt-container {
+    display: flex;
+    align-items: center;
+    width: 22rem;
+    max-width: 100%;
+  }
 
-    .key-stroke, .or {
-        display: none;
-    }
+  .prompt-div {
+    max-width: 100%
+  }
 
-    .prompt-buttons {
-        justify-content: center;
-    }
-
-    .prompt-container {
-        max-width: 400px;
-        width: 100%;
-    }
-
-    .prompt-box, .prompt-input {
-        width: 100%;
-    }
+  .prompt-box, .prompt-input {
+    width: 18rem;
+    max-width: 100%;
+  }
 }
 
 
