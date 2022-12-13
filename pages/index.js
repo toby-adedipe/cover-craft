@@ -60,20 +60,24 @@ const Home = () => {
           </div>
         </div>
         <div className="prompt-container">
-          <label>Company name: </label>
-          <input 
-            type="text" 
-            className="prompt-input"
-            placeholder='Company Name (e.g. Microsoft)' 
-            onChange={onChangeCompanyName}
-          />
-          <label>Role:</label>
-          <input 
-            type="text" 
-            className="prompt-input" 
-            placeholder="Role you're applying for(e.g. software developer)"
-            onChange={onChangeJobRole}
-          />
+          <div className="prompt-div">
+            <label>Company name: </label>
+            <input 
+              type="text" 
+              className="prompt-input"
+              placeholder='Company Name (e.g. Microsoft)' 
+              onChange={onChangeCompanyName}
+            />
+          </div>
+          <div className="prompt-div">
+            <label>Role:</label>
+            <input 
+              type="text" 
+              className="prompt-input" 
+              placeholder="Role you're applying for(e.g. software developer)"
+              onChange={onChangeJobRole}
+            />
+          </div>
           {/* <textarea
             className="prompt-box"
             placeholder="start typing here"
