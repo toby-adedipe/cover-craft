@@ -1,13 +1,16 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import buildspaceLogo from '../assets/buildspace-logo.png';
-import { useState } from 'react';
-import { FaCopy } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import TagManager from 'react-gtm-module';
 
 const Home = () => {
-  const [userInput, setUserInput] = useState('');
+  const tagManagerArgs = {
+    gtmId: 'G-7Q8WJ2V31B'
+  }
+
   const [companyName, setCompanyName] = useState('');
   const [jobRole, setJobRole] = useState('');
+  const [skills, setSkills] = useState('');
+  const [jobDescription, setJobDescription] = useState('');
   const [apiOutput, setApiOutput] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
 
@@ -20,7 +23,7 @@ const Home = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ companyName,  jobRole}),
+      body: JSON.stringify({ companyName,  jobRole, skills, jobDescription}),
     });
 
     const data = await response.json();
@@ -30,10 +33,6 @@ const Home = () => {
     setApiOutput(`${output.text}`);
     setIsGenerating(false);
   }
-
-  // const onUserChangedText = (event) => {
-  //   setUserInput(event.target.value);
-  // };
   
   const onChangeJobRole = (e) => {
     setJobRole(e.target.value);
@@ -42,6 +41,18 @@ const Home = () => {
   const onChangeCompanyName = (e) => {
     setCompanyName(e.target.value);
   }
+
+  const onChangeSkills = (e) => {
+    setSkills(e.target.value);
+  };
+
+  const onChangeJobDescription = (e) => {
+    setJobDescription(e.target.value);
+  };
+
+  useEffect(()=>{
+    TagManager.initialize(tagManagerArgs);
+  }, [])
 
   const copyText = () => {navigator.clipboard.writeText(apiOutput)}
 
@@ -65,6 +76,7 @@ const Home = () => {
             <input 
               type="text" 
               className="prompt-input"
+              maxLength={200}
               placeholder='Company Name (e.g. Microsoft)' 
               onChange={onChangeCompanyName}
             />
@@ -74,16 +86,45 @@ const Home = () => {
             <input 
               type="text" 
               className="prompt-input" 
+              maxLength={200}
               placeholder="Role you're applying for(e.g. software developer)"
               onChange={onChangeJobRole}
             />
           </div>
-          {/* <textarea
-            className="prompt-box"
-            placeholder="start typing here"
-            value={userInput}
-            onChange={onUserChangedText}
-          /> */}
+          <div className='prompt-div'>
+            <label>Skills:</label>
+            <p 
+              className='word-count'
+              style={{
+                color: skills.length> 950 ? '#FF4F12' : '#fff'
+              }}
+            > 
+              ({1000-skills.length}) 
+            </p>
+            <textarea
+              maxLength={1000}
+              className="prompt-box"
+              placeholder="start typing here"
+              onChange={onChangeSkills}
+            />
+          </div>
+          <div className='prompt-div'>
+            <label>Job Description:</label>
+            <p 
+              className='word-count'
+              style={{
+                color: skills.length> 950 ? '#FF4F12' : '#fff'
+              }}
+            > 
+              ({ 1000-jobDescription.length }) 
+            </p>
+            <textarea
+              maxLength={1000}
+              className="prompt-box"
+              placeholder="start typing here"
+              onChange={onChangeJobDescription}
+            />
+          </div>
           <div className="prompt-buttons">
             <a className="generate-button" onClick={callGenerateEndpoint}>
               <div className="generate">
