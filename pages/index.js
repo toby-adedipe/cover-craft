@@ -104,7 +104,7 @@ const Home = () => {
             <textarea
               maxLength={1000}
               className="prompt-box"
-              placeholder="start typing here"
+              placeholder="Let's show off your awesome skills! Tell us what you do and what skills you bring to the table!"
               onChange={onChangeSkills}
             />
           </div>
@@ -121,7 +121,7 @@ const Home = () => {
             <textarea
               maxLength={1000}
               className="prompt-box"
-              placeholder="start typing here"
+              placeholder="Let's get the job description for the job you're applying to in here!"
               onChange={onChangeJobDescription}
             />
           </div>
