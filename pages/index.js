@@ -128,7 +128,7 @@ const Home = () => {
           <div className="prompt-buttons">
             <a className="generate-button" onClick={callGenerateEndpoint}>
               <div className="generate">
-                {isGenerating ? <span class="loader"></span> : <p>Generate</p>}
+                {isGenerating ? <span className="loader"></span> : <p>Generate</p>}
               </div>
             </a>
           </div>

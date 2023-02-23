@@ -6,28 +6,30 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const basePromptPrefix = "write me an amazing cover letter for a";
 const generateAction = async (req, res) => {
+  const basePromptPrefix = "write me an amazing cover letter for a";
+
+  const { jobRole, skills, companyName, jobDescription } = req.body;
   // Run first prompt
   let prompt;
-  if (req.body.skills && !req.body.jobDescription){
+  if (skills && !jobDescription){
     //if there is skills and no jobdescription
-    prompt = `${basePromptPrefix} ${req.body.jobRole} role at ${req.body.companyName} taking into
-      consideration my following skills: ${req.body.skills} \n`
+    prompt = `${basePromptPrefix} ${jobRole} role at ${companyName} taking into
+      consideration my following skills: ${skills} \n`
     console.log('token size(s): ', Math.floor(prompt.length/4));
-  } else if (req.body.jobDescription && !req.body.skills){
+  } else if (jobDescription && !skills){
     //if there is a job description but no skills
-    prompt = `${basePromptPrefix} ${req.body.jobRole} role at ${req.body.companyName} with the following 
-      job description: ${req.body.skills} \n`
+    prompt = `${basePromptPrefix} ${jobRole} role at ${companyName} with the following 
+      job description: ${skills} \n`
     console.log('token size(d): ', Math.floor(prompt.length/4));
-  } else if (req.body.skills && req.body.jobDescription){
+  } else if (skills && jobDescription){
     //if user added both skills and job description
-    prompt = `${basePromptPrefix} ${req.body.jobRole} role at ${req.body.companyName} taking into consideration
-      the following skills and job description. job description: ${req.body.jobDescription}. \n skills: ${req.body.skills}. \n`
+    prompt = `${basePromptPrefix} ${jobRole} role at ${companyName} taking into consideration
+      the following skills and job description. job description: ${jobDescription}. \n skills: ${skills}. \n`
     console.log('token size(sd): ', Math.floor(prompt.length/4));
   } else {
     //if user doesn't add any
-    prompt = `${basePromptPrefix} ${req.body.jobRole} role at ${req.body.companyName}`;
+    prompt = `${basePromptPrefix} ${jobRole} role at ${companyName}`;
     console.log('token size(def): ', Math.floor(prompt.length/4));
   }
 
