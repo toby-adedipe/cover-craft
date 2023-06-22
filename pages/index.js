@@ -2,6 +2,10 @@ import Head from 'next/head';
 import { useEffect, useMemo, useState } from 'react';
 import TagManager from 'react-gtm-module';
 const crypto = require('crypto');
+import { Redis } from "@upstash/redis";
+
+const redis = Redis.fromEnv()
+
 
 const Home = ({ hashId, userName, userSkills, userWorkHistory }) => {
   const tagManagerArgs = {
@@ -138,10 +142,10 @@ const Home = ({ hashId, userName, userSkills, userWorkHistory }) => {
       <div className="container">
         <div className="header">
           <div className="header-title">
-            <h1>Cover Craft</h1>
+            <h2>Cover Craft</h2>
           </div>
           <div className="header-subtitle">
-            <h2>Discover the Power of GPT3 with Covercraft: An Automated Cover Letter Writing Tool</h2>
+            <h2>Craft professional cover letters with ease using Cover Craft. Generate tailored cover letters that captivate employers and boost your chances of success.</h2>
           </div>
         </div>
         <div className="prompt-container">
@@ -152,7 +156,7 @@ const Home = ({ hashId, userName, userSkills, userWorkHistory }) => {
               className="prompt-input" 
               value={name}
               maxLength={200}
-              placeholder="Please tell us your full name so we can make it more personalized."
+              placeholder="Full name so we can make it more personalized."
               onChange={onChangeName}
             />
           </div>
@@ -179,7 +183,7 @@ const Home = ({ hashId, userName, userSkills, userWorkHistory }) => {
               maxLength={200}
               onKeyDown={handleKeyPress}
               value={skillStr}
-              placeholder="please enter as many skills as possible, we will incoperate them into the cover letter"
+              placeholder="Add your skills by typing them here and pressing enter after each skill."
               onChange={onSkillChange}
             />
           </div>             
@@ -284,8 +288,6 @@ export const getServerSideProps = async ({ req }) => {
     }
   }
 
-  
-
   function generateHash(ipAddress) {
     const hash = crypto.createHash('sha256');
     hash.update(ipAddress);
@@ -294,17 +296,7 @@ export const getServerSideProps = async ({ req }) => {
   
   const hashId = generateHash(String(ip));
  
-  const response = await fetch(`${process.env.URL}/api/getData`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ hashId }),
-  });
-
-  const json = await response?.json();
-
-  const { data } = json;
+  const data = await redis.hgetall(`user:${hashId}`);
 
   return {
     props: {
