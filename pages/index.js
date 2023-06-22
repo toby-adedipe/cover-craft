@@ -124,7 +124,6 @@ const Home = ({ hashId, userName, userSkills, userWorkHistory }) => {
   };
 
   useEffect(()=>{
-    console.log('ip in useeffect: ', hashId);
     TagManager.initialize(tagManagerArgs);
   }, [])
 
@@ -302,9 +301,8 @@ export const getServerSideProps = async ({ req }) => {
     },
     body: JSON.stringify({ hashId }),
   });
-  console.log('rep: ', response);
 
-  const json = await response.json();
+  const json = await response?.json();
 
   const { data } = json;
 
