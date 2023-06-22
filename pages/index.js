@@ -195,10 +195,10 @@ const Home = ({ hashId, userName, userSkills, userWorkHistory }) => {
                 color: workHistory.length> 950 ? '#FF4F12' : '#fff'
               }}
             > 
-              ({1000-workHistory.length}) 
+              ({3000-workHistory.length}) 
             </p>
             <textarea
-              maxLength={1000}
+              maxLength={3000}
               value={workHistory}
               className="prompt-box"
               placeholder="Tell us about your work history"
@@ -233,10 +233,10 @@ const Home = ({ hashId, userName, userSkills, userWorkHistory }) => {
                 color: jobDescription.length> 950 ? '#FF4F12' : '#fff'
               }}
             > 
-              ({ 1000-jobDescription.length }) 
+              ({ 3000-jobDescription.length }) 
             </p>
             <textarea
-              maxLength={1000}
+              maxLength={3000}
               className="prompt-box"
               placeholder="Let's get the job description for the job you're applying to in here!"
               onChange={onChangeJobDescription}
