@@ -9,5 +9,5 @@ export default async function getDataAction(req, res) {
   if(data){
     return res.status(200).json({ data });
   }
-  return res.status(200)({ data: {} })
+  return res.status(200).json({ data: {} })
 }
