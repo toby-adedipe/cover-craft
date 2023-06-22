@@ -6,43 +6,34 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const generateAction = async (req, res) => {
-  const basePromptPrefix = "write me an amazing cover letter for a";
+const generateCoverLetter = async (req, res) => {
 
-  const { jobRole, skills, companyName, jobDescription } = req.body;
-  // Run first prompt
-  let prompt;
-  if (skills && !jobDescription){
-    //if there is skills and no jobdescription
-    prompt = `${basePromptPrefix} ${jobRole} role at ${companyName} taking into
-      consideration my following skills: ${skills} \n`
-    console.log('token size(s): ', Math.floor(prompt.length/4));
-  } else if (jobDescription && !skills){
-    //if there is a job description but no skills
-    prompt = `${basePromptPrefix} ${jobRole} role at ${companyName} with the following 
-      job description: ${skills} \n`
-    console.log('token size(d): ', Math.floor(prompt.length/4));
-  } else if (skills && jobDescription){
-    //if user added both skills and job description
-    prompt = `${basePromptPrefix} ${jobRole} role at ${companyName} taking into consideration
-      the following skills and job description. job description: ${jobDescription}. \n skills: ${skills}. \n`
-    console.log('token size(sd): ', Math.floor(prompt.length/4));
-  } else {
-    //if user doesn't add any
-    prompt = `${basePromptPrefix} ${jobRole} role at ${companyName}`;
-    console.log('token size(def): ', Math.floor(prompt.length/4));
-  }
+  const { name, skills, workHistory, jobRole, companyName, jobDescription } = req.body;
 
-  const baseCompletion = await openai.createCompletion({
-    model: 'text-davinci-003',
-    prompt: prompt,
-    temperature: 0.8, //give users ability to adjust
-    max_tokens: 500, //also check this
-  });
+  const basePrompt = `name: ${name}
+  skills: ${skills},
+  workhistory: ${workHistory}
+  jobrole: ${jobRole}
+  companyname: ${companyName}
+  job description: ${jobDescription}
   
-  const basePromptOutput = baseCompletion.data.choices.pop();
+  Write a conversational cover letter for a job application as a [jobrole] at [companyname] using my [workhistory] to show how i am prepared for the position, mention my relevant [skills] and how they match the job description"`
 
-  res.status(200).json({ output: basePromptOutput });
-};
+  
+  try {
+    const completion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {"role": "system", "content": "you are a brilliant cover letter writer that writes personalized cover letters."},
+        {"role": "user", "content": basePrompt },
+      ]
+    })
+  
+    const completionOutput = completion.data.choices[0].message.content;  
+    res.status(200).json({ output: completionOutput });
+  } catch (error) {
+    res.status(404).json({ error: error });
+  }
+}
 
-export default generateAction;
+export default generateCoverLetter;

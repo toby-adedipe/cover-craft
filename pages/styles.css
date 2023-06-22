@@ -6,7 +6,7 @@
   font-family: 'Manrope', sans-serif;
 }
 
-label,p {
+label{
   color: #FFF
 }
 
@@ -50,6 +50,24 @@ label,p {
 .header-title {
   display: flex;
   gap: 12px;
+}
+.skill-set{
+  margin-top: .5rem;
+  color: #32302C;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: .75rem;
+  column-gap: .75rem;
+}
+.skill-set > div{
+  border-radius: 1rem;
+  padding: .5rem;
+  font-size: 0.75rem;
+}
+
+.deleteBtn {
+  cursor: pointer;
+  font-weight: 700;
 }
 
 .header-title h1 {
@@ -465,6 +483,7 @@ textarea, input {
     animation: rotation 1s linear infinite;
 }
 
+
 @keyframes rotation {
     0% {
         transform: rotate(0deg);
@@ -473,4 +492,21 @@ textarea, input {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.footer{
+  border-top: 1px solid rgb(39, 39, 39);
+  width: 100%;
+  font-size: .875rem;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: space-between;
+}
+.footer > p {
+  margin: .5rem;
+}
+
+.footer > p > a {
+  color: #007BFF;
+  text-decoration: none;
 }
