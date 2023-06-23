@@ -22,7 +22,7 @@ const generateCoverLetter = async (req, res) => {
   
   try {
     const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo-16k",
+      model: "gpt-3.5-turbo",
       messages: [
         {"role": "system", "content": "you are a brilliant cover letter writer that writes personalized cover letters."},
         {"role": "user", "content": basePrompt },
