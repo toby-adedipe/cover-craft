@@ -147,6 +147,7 @@ const Home = ({ hashId, userName, userSkills, userWorkHistory }) => {
           <div className="header-subtitle">
             <h2>Craft professional cover letters with ease using Cover Craft. Generate tailored cover letters that captivate employers and boost your chances of success.</h2>
           </div>
+          <a href="https://www.producthunt.com/posts/cover-craft?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-cover&#0045;craft" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=401088&theme=light" alt="Cover&#0032;Craft - Craft&#0032;cover&#0032;letters&#0032;with&#0032;ease&#0032;&#0045;&#0032;tailored&#0032;&#0038;&#0032;captivating | Product Hunt" style={{width: "250px", height:"54px", marginTop: '1rem'}} /></a>
         </div>
         <div className="prompt-container">
           <div className="prompt-div">
