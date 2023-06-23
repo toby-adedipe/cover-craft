@@ -2,22 +2,18 @@ import Head from 'next/head';
 import { useEffect, useMemo, useState } from 'react';
 import TagManager from 'react-gtm-module';
 const crypto = require('crypto');
-import { Redis } from "@upstash/redis";
 
-const redis = Redis.fromEnv()
-
-
-const Home = ({ hashId, userName, userSkills, userWorkHistory }) => {
+const Home = ({ hashId }) => {
   const tagManagerArgs = {
     gtmId: 'G-7Q8WJ2V31B'
   }
 
   const [companyName, setCompanyName] = useState('');
-  const [name, setName] = useState(userName);
+  const [name, setName] = useState("");
   const [jobRole, setJobRole] = useState('');
   const [skillStr, setSkill] = useState('');
-  const [skillSet, setSkillSet] = useState(userSkills);
-  const [workHistory, setWorkHistory] = useState(userWorkHistory);
+  const [skillSet, setSkillSet] = useState([]);
+  const [workHistory, setWorkHistory] = useState("");
   const [jobDescription, setJobDescription] = useState('');
   const [apiOutput, setApiOutput] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
@@ -129,6 +125,31 @@ const Home = ({ hashId, userName, userSkills, userWorkHistory }) => {
 
   useEffect(()=>{
     TagManager.initialize(tagManagerArgs);
+    async function fetchData() {
+    try {
+      const response = await fetch('/api/getData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+          body: JSON.stringify({ hashId }),
+        });
+    
+        const {data} = await response.json();
+    
+        const userName = data?.name ? data?.name : "";
+        const userSkills = data?.skills ? data?.skills.split(",") : [];
+        const userWorkHistory = data?.workHistory ? data?.workHistory : "";
+    
+
+        setName(userName);
+        setSkillSet(userSkills);
+        setWorkHistory(userWorkHistory)
+    } catch (error) {
+      console.error('error: ', error);
+    }
+  }
+  fetchData();
   }, [])
 
   const copyText = () => {navigator.clipboard.writeText(apiOutput)}
@@ -297,14 +318,10 @@ export const getServerSideProps = async ({ req }) => {
   
   const hashId = generateHash(String(ip));
  
-  const data = await redis.hgetall(`user:${hashId}`);
 
   return {
     props: {
       hashId,
-      userName: data?.name ? data?.name : "",
-      userSkills: data?.skills ? data?.skills.split(",") : [],
-      userWorkHistory: data?.workHistory ? data?.workHistory : ""
     },
   };
 };
