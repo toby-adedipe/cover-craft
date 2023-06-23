@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import TagManager from 'react-gtm-module';
 const crypto = require('crypto');
 
@@ -17,6 +17,16 @@ const Home = ({ hashId }) => {
   const [jobDescription, setJobDescription] = useState('');
   const [apiOutput, setApiOutput] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
+
+    
+  const bottomRef = useRef(null);
+
+  // Scroll to the bottom when the response is received
+  const handleResponseReceived = () => {
+    bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    bottomRef.current.scro
+  };
+
 
   const callGenerateEndpoint = async () => {
     setIsGenerating(true);
@@ -39,11 +49,12 @@ const Home = ({ hashId }) => {
   
       setApiOutput(`${output}`);
       setIsGenerating(false);
+      handleResponseReceived()
     } catch (error) {
       setIsGenerating(false);
     }
   }
-  
+
   const onChangeJobRole = (e) => {
     setJobRole(e.target.value);
   }
@@ -273,7 +284,7 @@ const Home = ({ hashId }) => {
           </div>
           {
             apiOutput && (
-              <div className="output">
+              <div className="output" ref={bottomRef}>
                 <div className="output-header-container">
                   <div className="output-header">
                     <h3>Cover Letter</h3>
