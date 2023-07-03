@@ -16,7 +16,8 @@ const Home = ({ hashId }) => {
   const [workHistory, setWorkHistory] = useState("");
   const [jobDescription, setJobDescription] = useState('');
   const [apiOutput, setApiOutput] = useState('')
-  const [isGenerating, setIsGenerating] = useState(false)
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [error, setError] = useState(null);
 
     
   const bottomRef = useRef(null);
@@ -30,6 +31,7 @@ const Home = ({ hashId }) => {
 
   const callGenerateEndpoint = async () => {
     setIsGenerating(true);
+    setError(null)
     
     let skills = skillSet.length> 0 ? skillSet.join(', ') : "";
 
@@ -51,6 +53,20 @@ const Home = ({ hashId }) => {
       setIsGenerating(false);
       handleResponseReceived()
     } catch (error) {
+      if(error){
+        console.log('setting error', error)
+        setError(`Oops! We encountered a little hiccup while creating your cover letter. Our AI took longer than expected to respond, and we apologize for the delay. We understand that your time is valuable, and we're sorry for any inconvenience caused.
+
+        But hey, don't worry! We're on it and working to fix the issue as quickly as possible. In the meantime, we kindly ask you to give it another shot and try generating your cover letter again. We're confident that it will work smoothly this time around.
+        
+        If you have any questions or need assistance, our friendly support team is here to help. Just reach out to us, and we'll be more than happy to lend a hand. We truly appreciate your understanding and patience.
+        
+        Thank you for being awesome and giving us another chance!
+        
+        Warm regards,
+        Cover craft`)
+      }
+      
       setIsGenerating(false);
     }
   }
@@ -282,9 +298,10 @@ const Home = ({ hashId }) => {
               </div>
             </a>
           </div>
+          <div ref={bottomRef}>
           {
             apiOutput && (
-              <div className="output" ref={bottomRef}>
+              <div className="output">
                 <div className="output-header-container">
                   <div className="output-header">
                     <h3>Cover Letter</h3>
@@ -300,6 +317,21 @@ const Home = ({ hashId }) => {
                 </a>
               </div>
           )}
+          {
+            error && (
+              <div  className="output">
+                <div className="output-header-container">
+                  <div className="output-header">
+                    <h4>⚠️</h4>
+                  </div>
+                </div>
+                <div className="output-content">
+                  <p>{error}</p>
+                </div>
+              </div>
+            )
+          }
+          </div>
         </div>
       </div>
       <div className='footer'>
